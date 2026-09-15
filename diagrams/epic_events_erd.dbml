@@ -1,0 +1,45 @@
+Table roles {
+  id integer [pk, increment]
+  name varchar(50) [not null, unique]
+}
+
+Table employees {
+  id integer [pk, increment]
+  employee_number varchar(50) [not null, unique]
+  full_name varchar(100) [not null]
+  email varchar(255) [not null, unique]
+  password_hash varchar(255) [not null]
+  role_id integer [not null, ref: > roles.id]
+}
+
+Table clients {
+  id integer [pk, increment]
+  full_name varchar(100) [not null]
+  email varchar(255) [not null]
+  phone varchar(30) [not null]
+  company_name varchar(150) [not null]
+  created_at timestamp [not null]
+  updated_at timestamp
+  sales_contact_id integer [not null, ref: > employees.id]
+}
+
+Table contracts {
+  id integer [pk, increment]
+  client_id integer [not null, ref: > clients.id]
+  total_amount numeric(12,2) [not null]
+  remaining_amount numeric(12,2) [not null]
+  created_at timestamp [not null]
+  signed boolean [not null, default: false]
+}
+
+Table events {
+  id integer [pk, increment]
+  contract_id integer [not null, unique, ref: > contracts.id]
+  name varchar(150) [not null]
+  start_date timestamp [not null]
+  end_date timestamp [not null]
+  location varchar(255) [not null]
+  attendees integer [not null]
+  notes text
+  support_contact_id integer [ref: > employees.id]
+}
