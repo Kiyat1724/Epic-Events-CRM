@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 
@@ -12,9 +11,7 @@ def get_required_env(name: str) -> str:
     value = os.getenv(name)
 
     if not value:
-        raise RuntimeError(
-            f"The required environment variable {name} is missing."
-        )
+        raise RuntimeError(f"The required environment variable {name} is missing.")
 
     return value
 

@@ -12,6 +12,10 @@ dependencies = [
     "sqlalchemy>=2.0.52",
 ]
 
+
+[tool.black]
+target-version = ["py313"]
+line-length = 88
 [dependency-groups]
 dev = [
     "black>=26.5.1",
