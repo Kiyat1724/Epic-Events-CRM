@@ -1,7 +1,7 @@
 import click
 
 from epic_events.cli.auth_commands import login, logout, status
-from epic_events.cli.employee_commands import bootstrap_admin
+from epic_events.cli.employee_commands import bootstrap_admin, employees
 
 
 @click.group()
@@ -19,7 +19,7 @@ cli.add_command(bootstrap_admin)
 cli.add_command(login)
 cli.add_command(logout)
 cli.add_command(status)
-
+cli.add_command(employees)
 
 if __name__ == "__main__":
     cli()

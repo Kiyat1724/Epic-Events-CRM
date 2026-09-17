@@ -1,4 +1,9 @@
 from pathlib import Path
+from epic_events.services.jwt_service import (
+    AuthenticationError,
+    TokenPayload,
+    decode_access_token,
+)
 
 SESSION_DIRECTORY = Path.home() / ".epic_events_crm"
 SESSION_FILE = SESSION_DIRECTORY / "session.jwt"
@@ -54,3 +59,17 @@ def delete_session_token(
 
     session_file.unlink()
     return True
+
+
+def get_current_identity() -> TokenPayload:
+    """Return the validated identity stored in the local session."""
+
+    token = load_session_token()
+    if token is None:
+        raise AuthenticationError("Authentication is required. Use the login command.")
+
+    try:
+        return decode_access_token(token)
+    except AuthenticationError:
+        delete_session_token()
+        raise
