@@ -41,3 +41,25 @@ def test_add_persists_and_refreshes_employee() -> None:
     session.add.assert_called_once_with(employee)
     session.flush.assert_called_once_with()
     session.refresh.assert_called_once_with(employee)
+
+
+def test_exists_by_role_name_returns_true_when_employee_exists() -> None:
+    session = Mock(spec=Session)
+    session.scalar.return_value = 1
+    repository = EmployeeRepository(session)
+
+    result = repository.exists_by_role_name("management")
+
+    assert result is True
+    session.scalar.assert_called_once()
+
+
+def test_exists_by_role_name_returns_false_when_employee_does_not_exist() -> None:
+    session = Mock(spec=Session)
+    session.scalar.return_value = None
+    repository = EmployeeRepository(session)
+
+    result = repository.exists_by_role_name("management")
+
+    assert result is False
+    session.scalar.assert_called_once()
