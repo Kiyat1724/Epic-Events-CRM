@@ -19,21 +19,18 @@ class ClientService:
     def __init__(self, repository: ClientRepository) -> None:
         self.repository = repository
 
-    def list_clients(self, identity: TokenPayload) -> list[Client]:
-        """Return all clients to an authenticated employee."""
+    def list_clients(self) -> list[Client]:
+        """Return all clients."""
 
-        del identity
         return self.repository.list_all()
 
     def get_client(
         self,
-        identity: TokenPayload,
         *,
         client_id: int,
     ) -> Client:
-        """Return one client to an authenticated employee."""
+        """Return one client."""
 
-        del identity
         client = self.repository.get_by_id(client_id)
 
         if client is None:

@@ -50,11 +50,11 @@ def clients() -> None:
 def list_clients_command() -> None:
     """List every client."""
 
-    identity = get_authenticated_identity()
+    get_authenticated_identity()
 
     with session_scope() as session:
         service = ClientService(ClientRepository(session))
-        client_list = service.list_clients(identity)
+        client_list = service.list_clients()
 
         if not client_list:
             click.echo("No clients found.")
@@ -71,13 +71,12 @@ def list_clients_command() -> None:
 def show_client_command(client_id: int) -> None:
     """Display one client."""
 
-    identity = get_authenticated_identity()
+    get_authenticated_identity()
 
     try:
         with session_scope() as session:
             service = ClientService(ClientRepository(session))
             client = service.get_client(
-                identity,
                 client_id=client_id,
             )
             display_client(client)
@@ -134,7 +133,6 @@ def update_client_command(client_id: int) -> None:
         with session_scope() as session:
             service = ClientService(ClientRepository(session))
             existing_client = service.get_client(
-                identity,
                 client_id=client_id,
             )
             require_client_update(
