@@ -2,6 +2,7 @@ import click
 
 from epic_events.cli.auth_commands import login, logout, status
 from epic_events.cli.client_commands import clients
+from epic_events.cli.contract_commands import contracts
 from epic_events.cli.employee_commands import bootstrap_admin, employees
 
 
@@ -18,6 +19,7 @@ def hello() -> None:
 
 cli.add_command(bootstrap_admin)
 cli.add_command(clients)
+cli.add_command(contracts)
 cli.add_command(employees)
 cli.add_command(login)
 cli.add_command(logout)
