@@ -5,6 +5,7 @@ from epic_events.cli.client_commands import clients
 from epic_events.cli.contract_commands import contracts
 from epic_events.cli.employee_commands import bootstrap_admin, employees
 from epic_events.cli.event_commands import events
+from epic_events.monitoring import initialize_sentry
 
 
 @click.group()
@@ -30,4 +31,5 @@ cli.add_command(status)
 
 
 if __name__ == "__main__":
+    initialize_sentry()
     cli()
