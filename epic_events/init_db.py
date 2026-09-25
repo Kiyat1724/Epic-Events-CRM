@@ -3,17 +3,20 @@ from sqlalchemy import inspect
 from epic_events.database import Base, engine
 from epic_events.models import Client, Contract, Employee, Event, Role
 
-EXPECTED_TABLES: set[str] = {
-    "roles",
-    "employees",
-    "clients",
-    "contracts",
-    "events",
-}
+MODEL_CLASSES = (
+    Role,
+    Employee,
+    Client,
+    Contract,
+    Event,
+)
+
+EXPECTED_TABLES: set[str] = {model_class.__tablename__ for model_class in MODEL_CLASSES}
 
 
 def initialize_database() -> None:
     """Create all database tables and verify their existence."""
+
     Base.metadata.create_all(bind=engine)
 
     inspector = inspect(engine)
