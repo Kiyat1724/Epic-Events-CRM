@@ -89,3 +89,16 @@ def test_authenticate_employee_rejects_wrong_password() -> None:
             email="manager@example.com",
             password="WrongPassword123!",
         )
+
+
+def test_hash_password_uses_random_salt() -> None:
+    """Generate a different salted hash for the same password."""
+
+    password = "SecurePassword123!"
+
+    first_hash = hash_password(password)
+    second_hash = hash_password(password)
+
+    assert first_hash != second_hash
+    assert verify_password(password, first_hash)
+    assert verify_password(password, second_hash)
