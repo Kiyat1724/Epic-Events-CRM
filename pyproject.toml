@@ -3,6 +3,7 @@ name = "epic-events-crm"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "alembic>=1.20.0",
     "argon2-cffi>=25.1.0",
     "click>=8.5.0",
     "psycopg[binary]>=3.3.5",

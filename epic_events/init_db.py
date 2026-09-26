@@ -1,23 +1,31 @@
+from pathlib import Path
+
+from alembic import command
+from alembic.config import Config
 from sqlalchemy import inspect
 
-from epic_events.database import Base, engine
-from epic_events.models import Client, Contract, Employee, Event, Role
+from epic_events.database import engine
 
-MODEL_CLASSES = (
-    Role,
-    Employee,
-    Client,
-    Contract,
-    Event,
-)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+ALEMBIC_CONFIG_PATH = PROJECT_ROOT / "alembic.ini"
 
-EXPECTED_TABLES: set[str] = {model_class.__tablename__ for model_class in MODEL_CLASSES}
+EXPECTED_TABLES: set[str] = {
+    "roles",
+    "employees",
+    "clients",
+    "contracts",
+    "events",
+}
 
 
 def initialize_database() -> None:
-    """Create all database tables and verify their existence."""
+    """Apply every migration and verify the expected database tables."""
 
-    Base.metadata.create_all(bind=engine)
+    alembic_config = Config(str(ALEMBIC_CONFIG_PATH))
+    command.upgrade(
+        alembic_config,
+        "head",
+    )
 
     inspector = inspect(engine)
     created_tables = set(inspector.get_table_names())
@@ -27,8 +35,8 @@ def initialize_database() -> None:
         missing_names = ", ".join(sorted(missing_tables))
         raise RuntimeError(f"Missing database tables: {missing_names}")
 
-    table_names = ", ".join(sorted(created_tables))
-    print(f"Database initialized successfully: {table_names}")
+    table_names = ", ".join(sorted(EXPECTED_TABLES))
+    print("Database migrations applied successfully: " f"{table_names}")
 
 
 if __name__ == "__main__":
