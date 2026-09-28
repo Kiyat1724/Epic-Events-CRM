@@ -5,6 +5,26 @@ la gestion des collaborateurs, clients, contrats et événements d’Epic Events
 
 Le projet utilise Python, Click, SQLAlchemy, PostgreSQL, Alembic, Argon2 et JWT.
 
+## Positionnement du projet
+
+Ce projet pédagogique illustre la transformation de besoins métier en une
+architecture back-end sécurisée. Les droits d’accès sont définis selon les
+responsabilités des équipes management, commerciale et support.
+
+Il met notamment en œuvre :
+
+- l’analyse des rôles et des responsabilités ;
+- le contrôle d’accès fondé sur les rôles et la propriété des ressources ;
+- la protection des mots de passe et des secrets ;
+- la validation des règles métier par des tests automatisés ;
+- la gestion contrôlée des évolutions de la base de données ;
+- la surveillance des erreurs sans transmission automatique de données
+  personnelles.
+
+Ces choix permettent de relier les besoins fonctionnels aux contrôles
+techniques, dans une logique de sécurité, de maîtrise des risques et de
+traçabilité.
+
 ## Fonctionnalités
 
 L’application permet notamment de :
