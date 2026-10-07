@@ -24,7 +24,7 @@ psycopg-binary==3.3.5 ; implementation_name != 'pypy'
     # via psycopg
 pycparser==3.0 ; implementation_name != 'PyPy'
     # via cffi
-pyjwt==2.14.0
+pyjwt==2.15.0
     # via epic-events-crm
 python-dotenv==1.2.3
     # via epic-events-crm
