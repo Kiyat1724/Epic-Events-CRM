@@ -24,7 +24,7 @@ psycopg-binary==3.3.5 ; implementation_name != 'pypy'
     # via psycopg
 pycparser==3.0 ; implementation_name != 'PyPy'
     # via cffi
-pyjwt==2.14.0
+pyjwt==2.15.0
     # via epic-events-crm
 python-dotenv==1.2.3
     # via epic-events-crm
@@ -40,5 +40,5 @@ typing-extensions==4.16.0
     #   sqlalchemy
 tzdata==2026.4 ; sys_platform == 'win32'
     # via psycopg
-urllib3==2.7.0
+urllib3==2.8.0
     # via sentry-sdk
